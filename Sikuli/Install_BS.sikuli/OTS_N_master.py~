@@ -1,0 +1,749 @@
+import timeit
+import logging
+import datetime,time
+import traceback
+import platform
+import os,sys,re
+import glob
+import subprocess as subp
+import time, json
+import os.path
+import zipfile
+import urllib,urllib2
+import argparse
+import json
+import copy, shutil
+import ssl, socket
+import xml.etree.ElementTree as ET
+from xml.dom import minidom
+
+a = 0
+b = 0
+
+def restart():
+    try:
+        vcCMD = "C:\\Program Files\\BlueStacks\\"
+        run(vcCMD + "HD-Quit.exe")
+        print "AppPlayer Quit Successfully..."
+        wait(15)
+        subp.Popen("C:\\ProgramData\\BlueStacks\\Client\\Bluestacks.exe")
+        print "AppPlayer started..."
+        wait(60)
+    except Exception, e:
+        print "Issue in Restart function - " + str(e)
+
+
+def getLastApp():
+    try:
+        url = "http://127.0.0.1:9999/getprop%20bst.config.topDisplayedPackage"
+        (response) = GetHTTPData(url)
+        if response:
+            response = json.loads(response)
+            appdisplayed = response['value']
+            return appdisplayed
+    except:
+        return None
+
+
+def GetHTTPData(url):
+    try:
+        req = urllib2.Request(url)
+        res = urllib2.urlopen(req)
+        data = res.read()
+        return data
+    except:
+        return None
+
+
+def Android_BootupCheck():
+    frontend_up()
+
+
+def frontend_up():
+    try:
+        start_time = time.time()
+        file_input("Start Time : - " + str(start_time) + "\n")
+        timeout = 300
+        while time.time() - start_time < timeout:
+            resp = getLastApp()
+            file_input("getLastApp Responce " + str(resp) + "\n")
+            if ((resp != None)) :
+                file_input("Home app has launched\n")
+                print "Android Bootup Check Pass"
+                end_time = time.time()
+                diff = end_time - start_time
+                diff = "%.2f" % diff
+                file_input("End Time : - " + str(end_time) + "\n")
+                file_input("Android Bootup Time : " + str(end_time) + " - " + str(start_time) + " = " + str(end_time - start_time) + "\n")
+                file_input("Sanity Testcase:: Android Bootup Check Successful : PASS\n")
+                file_input("Sanity Testcase:: Android First Bootup Time Duration : " + str(diff) + "s\n")
+                return 0
+            else:
+                time.sleep(2)
+
+            if time.time() - start_time > timeout:
+                file_input("Something went wrong , Android Up\n")
+                file_input("Sanity Testcase:: Android Bootup Check Successful : FAIL\n")
+                print "EXIT"
+                sys.exit(1001)
+
+    except Exception, e:
+        file_input("Error in frontend_up - " + str(e))
+        file_input("Sanity Testcase:: Android Bootup Check Successful : FAIL\n")
+   
+
+def slowType(text, time):
+    for c in text:
+        type(c)
+        wait(time)
+
+
+def file_input(text_input):
+    try:
+        my_dir = "c:\\Sanity_BGP_N_master\\"
+        my_file=file(my_dir + "bcgp_log.txt", "a")
+        my_file.write(text_input)
+        my_file.close
+    except:
+        print "Issue writing in File..."
+
+
+def FLE_click():
+    try:
+        if exists("1533801859037.png",60):
+            click("1533801859037.png")    
+            wait(3)
+        if exists("1533801859037.png",60):
+            FLE_click()
+        else:
+            return
+        
+    except Exception, e:
+        file_input("Some error in 'FLE_click()'")
+        file_input(str(e))
+
+
+def FLE_App():
+    try:               
+        if exists("1524136875477.png",300): 
+            FLE_click()            
+            
+            if exists("1524136925822.png",300):
+                file_input("First Launch(FLE) mechanism executed Successfully : Pass \n")
+                print "Pass"
+                restart()
+        else:
+            restart()
+            file_input("First Launch(FLE) mechanism executed Successfully : Fail \n")
+            print "Fail"
+
+    except:
+        file_input("First Launch(FLE) mechanism executed Successfully : Fail \n")
+        print "Fail"      
+
+
+def letsgo():
+    try:
+        if exists("1525417531587.png",60):
+            click("1525417531587.png")        
+            wait(3)
+        if exists("1525417531587.png",60):
+            letsgo()
+        else:
+            return
+        
+    except Exception, e:
+        file_input("Some error in 'letsgo()'")
+        file_input(str(e))
+        
+    
+def OTS():
+    try:
+        nex = 0
+        if exists("1533277884333.png",30):
+            click(Pattern("1533277884333.png").targetOffset(-44,0))
+        OTS = 0
+        if exists("1525163571768.png",30):
+            click("1525163571768-1.png")
+            a = 1
+
+        if a == 0:
+            if exists("1522133198332.png",30):
+                click("1522133198332.png")
+            if exists("1525163571768-2.png",30):
+                click("1525163571768-3.png")
+            
+        if exists("1525163791271.png",200):
+            click("1525163791271.png")
+            b = 1
+            file_input("Sanity Testcase:: BGP Client Installation Successful : Pass \n")
+        if b == 0:
+            if exists("1522133198332.png",30):
+                click("1522133198332.png")
+            if exists("1525163791271.png",200):
+                click("1525163791271.png")
+                file_input("Sanity Testcase:: BGP Client Installation Successful : Pass \n")
+
+        if exists("1520419219200.png"):
+            click("1520419219200.png")
+        
+        Android_BootupCheck()
+        wait(10)       
+
+        if exists("1523023177425.png",10):
+            if exists("1523023210451.png",60):
+                click(Pattern("1523023210451.png").targetOffset(50,-2))
+            if exists("1525248874250.png",60):
+                click("1525248874250.png")    
+                            
+        letsgo()
+            
+        if exists("1533121808122.png",120):
+            print "Old OTS Google Login Page Found.."
+        else:
+            OTS1()
+            return    
+            
+        if exists("1533121808122.png",120):
+            click("1533121808122.png")
+            wait(20)
+            slowType("qatestblue", 2)
+            if exists("1534232284144.png",120):
+                click("1534232284144.png")
+                nex = 1
+            if nex == 0:    
+                if exists("1533121838454.png",120):
+                    click("1533121838454.png")    
+            if exists("1533121862024.png",120):
+                click("1533121862024.png")
+                wait(10)
+                slowType("bluestacks", 2)
+            if exists("1533121889954.png",120):
+                click("1533121889954.png")
+            if exists("1533121910522.png",120):
+                click("1533121910522.png")
+                OTS = 1
+                file_input("Sanity Testcase:: One Time Setup for BlueStacks BGP Build : Pass \n")       
+                print "Pass OTS"
+            if exists("1531311121490.png",60):
+                click(Pattern("1531311121490.png").targetOffset(0,28))                    
+            if OTS == 0:
+                file_input("Sanity Testcase:: One Time Setup for BlueStacks BGP Build : Fail \n")       
+                print "Fail OTS"
+        else:
+            file_input("Sanity Testcase:: One Time Setup for BlueStacks BGP Build : Fail \n")       
+            print "Fail else"
+
+    except:
+        file_input("OTS Fail \n")       
+        print "Fail except"
+        OTS_FailCase()
+
+
+def OTS_FailCase():
+    try:
+        if exists("1525417531587.png",30):
+            letsgo()
+            
+        if exists("1533121808122.png",120):
+            print "Old OTS Google Login Page Found.."
+        else:
+            OTS1()
+            return    
+            
+        if exists("1533121808122.png",120):
+            click("1533121808122.png")
+            wait(60)
+            slowType("qatestblue", 2)
+            nex = 0
+            if exists("1534232284144.png",120):
+                click("1534232284144.png")
+                nex = 1
+            if nex == 0:    
+                if exists("1533121838454.png",120):
+                    click("1533121838454.png")
+            if exists("1533121862024.png",120):
+                click("1533121862024.png")
+                wait(10)
+                slowType("bluestacks", 2)
+            if exists("1533121889954.png",120):
+                click("1533121889954.png")
+            if exists("1533121910522.png",120):
+                click("1533121910522.png")
+                OTS = 1
+                file_input("Sanity Testcase:: One Time Setup for BlueStacks BGP Build : Pass \n")       
+                print "Pass OTS"
+            if exists("1531311121490.png",60):
+                click(Pattern("1531311121490.png").targetOffset(0,28))                    
+            if OTS == 0:
+                file_input("Sanity Testcase:: One Time Setup for BlueStacks BGP Build : Fail \n")       
+                print "Fail OTS - OTS_FailCase"
+        else:
+            file_input("Sanity Testcase:: One Time Setup for BlueStacks BGP Build : Fail \n")       
+            print "Fail else - OTS_FailCase"    
+            
+    except:
+        file_input("OTS Fail - OTS_FailCase \n")       
+        file_input("Sanity Testcase:: One Time Setup for BlueStacks BGP Build : Fail \n")
+        print "Fail except"
+
+
+def OTS1():
+    try:
+        if exists("1532685657978.png",120):
+            click("1532685657978.png")
+            wait(30)
+            slowType("qatestblue", 2)
+            
+            nex = 0
+            if exists("1534232284144.png",120):
+                click("1534232284144.png")
+                nex = 1
+                
+            if nex == 0:
+                if exists("1532685736397.png",120):
+                    click("1532685736397.png")
+                    
+            if exists("1532685770196.png",120):
+                click("1532685770196.png")
+                wait(10)
+                slowType("bluestacks", 2)
+            if exists("1532685828523.png",120):
+                click("1532685828523.png")
+            if exists("1532685851806.png",120):
+                click("1532685851806.png")
+                OTS = 1
+                file_input("Sanity Testcase:: One Time Setup for BlueStacks BGP Build : Pass \n")       
+                print "Pass OTS1"
+            if exists("1531311781476.png",60):
+                click(Pattern("1531311781476.png").targetOffset(5,23))
+                
+            if OTS == 0:
+                file_input("Sanity Testcase:: One Time Setup for BlueStacks BGP Build : Fail \n")       
+                print "Fail OTS1"
+        else:
+            file_input("Sanity Testcase:: One Time Setup for BlueStacks BGP Build : Fail \n")       
+            print "Fail else1"
+
+    except:
+        file_input("OTS Fail \n")   
+        file_input("Sanity Testcase:: One Time Setup for BlueStacks BGP Build : Fail \n")
+        print "Fail except1"        
+
+
+def ApkInstall_UI():
+    try:
+        if exists("1525935213194.png",10):
+            click("1525935213194.png")
+            file_input("Defender:: Home exists\n")            
+
+        if exists("1533041750214.png",10):
+            hover(Pattern("1533041750214.png").targetOffset(57,1))
+            file_input("Defender:: Icon hovered\n")
+            if exists("1533041836449.png",10):
+                click(Pattern("1533041836449.png").targetOffset(-6,-12))
+                file_input("Defender:: Install APK clicked\n")
+        if exists("1531132600209.png",10):
+            click(Pattern("1531132600209.png").targetOffset(24,17))
+            paste("C:\\Sanity_BGP_N_master\\ConfigFiles\\apk")
+            type(Key.ENTER)
+            file_input("Defender:: APK path pasted and Enter clicked\n")
+            
+            click("1507708299186.png")
+            file_input("Defender:: Defender clicked\n")
+            click(Pattern("1531132641028.png").targetOffset(-57,17))
+            file_input("Defender:: Defender Install clicked\n")
+            if exists("1525935213194.png",10):
+                click("1525935213194.png")
+          
+            if exists("1531132514628.png",120):
+               
+                file_input("Defender:: Apk Install 'Defender' via AppPlayer UI is working properly : Pass \n")
+                print "Pass"  
+                #wait(60)
+                #ApkUninstall_UI()
+            else:
+                file_input("Defender:: Apk Install 'Defender' via AppPlayer UI is working properly : Fail \n")
+                print "Fail"
+
+    except:
+        file_input("Defender:: Apk Install 'Defender' via AppPlayer UI is working properly : Fail \n")
+        print "Fail"    
+        
+                
+def ApkUninstall_UI():
+    try:
+        if exists("1525935213194.png",10):
+            click("1525935213194.png")
+            #if exists("1524479441783.png",10):
+                #click("1524479441783.png")
+            #if exists("1524479459850.png",10):
+                #click("1524479459850.png")
+                
+        if exists("1525935308803.png",10):
+            if exists("1525935510340.png",10):
+                click(Pattern("1525935510340.png").targetOffset(0,-8))
+
+        if exists("1525935544170.png",10):
+            click(Pattern("1525935544170.png").targetOffset(-25,-25))
+        if exists("1525935575565.png",10):
+            click("1525935588150.png")
+        
+        wait(5)
+        if exists("1525935308803.png",10):
+            file_input("Sanity Testcase:: Apk Uninstall 'Defender' via AppPlayer UI is working properly : Fail \n")
+            print "Fail"  
+        else:
+            file_input("Sanity Testcase:: Apk Uninstall 'Defender' via AppPlayer UI is working properly : Pass \n")
+            print "Pass"
+
+    except:
+        file_input("Sanity Testcase:: Apk Uninstall 'Defender' via AppPlayer UI is working properly : Fail \n")
+        print "Fail"
+                        
+                    
+def AppCenter_install():
+    try:
+        if exists("1525935213194.png",10):
+            click("1525935213194.png")
+            if exists("1506593250985.png",10):
+                click("1506593250985.png")
+                paste("temple run")
+                if exists("1506593330888.png",10):
+                    click("1506593330888.png")                   
+                    if exists("1506593479953.png",60):
+                        click(Pattern("1506593479953.png").targetOffset(75,22))
+                        if exists("1506593911281.png",10):
+                            click("1506593911281.png")
+                        if exists("1506593951012.png",10):
+                            click("1506593951012.png") 
+                            wait(90)
+                            if exists("1506604400033.png",10):
+                                click("1506604400033.png")
+                            if exists("1506604427740.png",10):                                                               
+                                file_input("Sanity Testcase:: App Install 'Temple Run' via App-Center is working properly : Pass \n")
+                                print "Pass"
+                            elif exists("1506604457682.png",10):
+                                file_input("Sanity Testcase:: App Install 'Temple Run' via App-Center is working properly : Pass \n")
+                                print "Pass"
+                            else:                                                             
+                                file_input("Sanity Testcase:: App Install 'Temple Run' via App-Center is working properly : Fail \n")
+                                print "Fail"  
+        restart()
+                              
+    except:      
+        file_input("Sanity Testcase:: App Install 'Temple Run' via App-Center is working properly : Fail \n")
+        print "Fail"   
+        restart()
+
+
+def CdnApp_install():
+    try:
+        if exists("1525935213194.png",10):
+            click("1525935213194.png")
+            if exists("1506593250985.png",10):
+                click("1506593250985.png")
+                paste("showbox")
+                if exists("1506593330888.png",10):
+                    click("1506593330888.png")
+                    if exists("1506599009296.png",60):
+                        click(Pattern("1506599009296.png").targetOffset(75,26))
+                    if exists("1506599009296.png"):
+                        click(Pattern("1506599009296.png").targetOffset(75,26))
+                        
+                        wait(120)                       
+                        if exists("1506599541268.png",10): 
+                            click("1506599541268.png")
+                            if exists("1506599599970.png",10):                               
+                                file_input("Sanity Testcase:: App Install 'ShowBox' via CDN is working properly : Pass \n")
+                                print "Pass"
+                            else:                               
+                                file_input("Sanity Testcase:: App Install 'ShowBox' via CDN is working properly : Fail \n")
+                                print "Fail"          
+        restart()
+                              
+    except:      
+        file_input("Sanity Testcase:: App Install 'ShowBox' via CDN is working properly : Fail \n")
+        print "Fail"   
+        restart()
+
+
+def install_apk_angrybirds():    
+    file_input("Fn install_apk_angrybirds() started.\n")
+    try:
+        apk_path = "C:\\Sanity_BGP_N_master\\ConfigFiles\\apk\\Angry_Birds_1.4.0.apk"
+        install_dir = "C:\\Program Files\\BlueStacks"
+        if install_dir:
+            apk_handler_path = install_dir + "\\HD-ApkHandler.exe"
+
+            try:
+                install_com = apk_handler_path + " " + apk_path
+                install = subp.call(install_com)
+                wait(5)
+
+                if exists("1525935213194.png",10):
+                    click("1525935213194.png")                                                
+                                                        
+                    if exists("1525935664008.png",120):
+                        file_input("App Install 'AngryBirds' via HD-ApkHandler.exe is working properly : Pass \n")                    
+                    else:
+                        if exists("1524045891206.png",10):
+                            click(Pattern("1524045891206.png").targetOffset(23,-1))
+                            if exists(Pattern("1524050453946.png").targetOffset(120,17),10):
+                                click(Pattern("1524050453946.png").targetOffset(120,17))
+                                wait(2)
+                                install = subp.call(install_com)
+                                wait(2)
+                            
+                        if exists("1524046908445.png",10):
+                            click(Pattern("1524046908445.png").targetOffset(25,-2))   
+                            if exists(Pattern("1524050453946.png").targetOffset(120,17),10):
+                                click(Pattern("1524050453946.png").targetOffset(120,17))
+                                wait(2)
+                                install = subp.call(install_com)
+                                wait(2)
+                            
+                        if exists("1524048187299.png",10):
+                            click(Pattern("1524048187299.png").targetOffset(28,-1))
+                            if exists(Pattern("1524050453946.png").targetOffset(120,17),10):
+                                click(Pattern("1524050453946.png").targetOffset(120,17))
+                                wait(2)
+                                install = subp.call(install_com)
+                                wait(2)
+                            
+                        if exists("1524050385541.png",10):
+                            click(Pattern("1524050385541.png").targetOffset(21,-1))
+                            if exists(Pattern("1524050453946.png").targetOffset(120,17),10):
+                                click(Pattern("1524050453946.png").targetOffset(120,17))
+                                wait(2)
+                                install = subp.call(install_com)
+                                wait(2)
+
+                        if exists("1525935664008.png",10):
+                            file_input("App Install 'AngryBirds' via HD-ApkHandler.exe is working properly : Pass \n")
+                        else:
+                            file_input("App Install 'AngryBirds' via HD-ApkHandler.exe is working properly : Fail \n")    
+                        
+            except Exception, e:
+                file_input("App Install 'AngryBirds' via HD-ApkHandler.exe is working properly : Fail \n")
+                file_input("Some error in 'Angry_Birds.apk'")
+                file_input(str(e))
+                file_input(traceback.format_exc())                
+
+    except Exception, e:
+        file_input("Some error in 'Angry_Birds.apk'")
+        file_input(str(e))
+
+
+def install_apk_StupidZombies():    
+    file_input("Fn install_apk_StupidZombies() started.\n")
+    try:
+        apk_path = "C:\\Sanity_BGP_N_master\\ConfigFiles\\apk\\Stupid_Zombies.apk"
+        install_dir = "C:\\Program Files\\BlueStacks"
+        if install_dir:
+            apk_handler_path = install_dir + "\\HD-ApkHandler.exe"
+
+            try:
+                install_com = apk_handler_path + " " + apk_path
+                install = subp.call(install_com)
+                wait(5)
+
+                if exists("1525935213194.png",10):
+                    click("1525935213194.png")                                                
+                                                        
+                    if exists("1534840472142.png",120):
+                        file_input("App Install 'StupidZombies' via HD-ApkHandler.exe is working properly : Pass \n")                    
+                    else:
+                        if exists("1524045891206.png",10):
+                            click(Pattern("1524045891206.png").targetOffset(23,-1))
+                            if exists(Pattern("1524050453946.png").targetOffset(120,17),10):
+                                click(Pattern("1524050453946.png").targetOffset(120,17))
+                                wait(2)
+                                install = subp.call(install_com)
+                                wait(2)
+                            
+                        if exists("1524046908445.png",10):
+                            click(Pattern("1524046908445.png").targetOffset(25,-2))   
+                            if exists(Pattern("1524050453946.png").targetOffset(120,17),10):
+                                click(Pattern("1524050453946.png").targetOffset(120,17))
+                                wait(2)
+                                install = subp.call(install_com)
+                                wait(2)
+                            
+                        if exists("1524048187299.png",10):
+                            click(Pattern("1524048187299.png").targetOffset(28,-1))
+                            if exists(Pattern("1524050453946.png").targetOffset(120,17),10):
+                                click(Pattern("1524050453946.png").targetOffset(120,17))
+                                wait(2)
+                                install = subp.call(install_com)
+                                wait(2)
+                            
+                        if exists("1524050385541.png",10):
+                            click(Pattern("1524050385541.png").targetOffset(21,-1))
+                            if exists(Pattern("1524050453946.png").targetOffset(120,17),10):
+                                click(Pattern("1524050453946.png").targetOffset(120,17))
+                                wait(2)
+                                install = subp.call(install_com)
+                                wait(2)
+
+                        if exists("1534840472142.png",10):
+                            file_input("App Install 'StupidZombies' via HD-ApkHandler.exe is working properly : Pass \n")
+                        else:
+                            file_input("App Install 'StupidZombies' via HD-ApkHandler.exe is working properly : Fail \n")    
+                        
+            except Exception, e:
+                file_input("App Install 'StupidZombies' via HD-ApkHandler.exe is working properly : Fail \n")
+                file_input("Some error in 'Stupid_Zombies.apk'")
+                file_input(str(e))
+                file_input(traceback.format_exc())                
+
+    except Exception, e:
+        file_input("Some error in 'Stupid_Zombies.apk'")   
+        file_input(str(e))
+
+
+def install_apk_candycrush():    
+    file_input("Fn install_apk_candycrush() started.\n")
+    try:
+        apk_path = "C:\\Sanity_BGP_N_master\\ConfigFiles\\apk\\Candy_Crush_Saga_1.44.1.apk"
+        install_dir = "C:\\Program Files\\BlueStacks"
+        if install_dir:
+            apk_handler_path = install_dir + "\\HD-ApkHandler.exe"
+
+            try:
+                install_com = apk_handler_path + " " + apk_path
+                install = subp.call(install_com)
+                wait(5)
+
+                if exists("1525935213194.png",10):
+                    click("1525935213194.png")                
+                                                               
+                    if exists("1525935704721.png",120):
+                        file_input("App Install 'CandyCrush' via HD-ApkHandler.exe is working properly : Pass \n")                    
+                    else:
+                        if exists("1524045891206.png",10):
+                            click(Pattern("1524045891206.png").targetOffset(23,-1))
+                            if exists(Pattern("1524050453946.png").targetOffset(120,17),10):
+                                click(Pattern("1524050453946.png").targetOffset(120,17))
+                                wait(2)
+                                install = subp.call(install_com)
+                                wait(2)
+                            
+                        if exists("1524046908445.png",10):
+                            click(Pattern("1524046908445.png").targetOffset(25,-2))   
+                            if exists(Pattern("1524050453946.png").targetOffset(120,17),10):
+                                click(Pattern("1524050453946.png").targetOffset(120,17))
+                                wait(2)
+                                install = subp.call(install_com)
+                                wait(2)
+                            
+                        if exists("1524048187299.png",10):
+                            click(Pattern("1524048187299.png").targetOffset(28,-1))
+                            if exists(Pattern("1524050453946.png").targetOffset(120,17),10):
+                                click(Pattern("1524050453946.png").targetOffset(120,17))
+                                wait(2)
+                                install = subp.call(install_com)
+                                wait(2)
+                            
+                        if exists("1524050385541.png",10):
+                            click(Pattern("1524050385541.png").targetOffset(21,-1))
+                            if exists(Pattern("1524050453946.png").targetOffset(120,17),10):
+                                click(Pattern("1524050453946.png").targetOffset(120,17))
+                                wait(2)
+                                install = subp.call(install_com)
+                                wait(2)
+
+                        if exists("1525935704721.png",10):
+                            file_input("App Install 'CandyCrush' via HD-ApkHandler.exe is working properly : Pass \n")
+                        else:
+                            file_input("App Install 'CandyCrush' via HD-ApkHandler.exe is working properly : Fail \n")    
+                        
+            except Exception, e:
+                file_input("App Install 'CandyCrush' via HD-ApkHandler.exe is working properly : Fail \n")
+                file_input("Some error in 'Candy_Crush.apk'")
+                file_input(str(e))
+                file_input(traceback.format_exc())                
+
+    except Exception, e:
+        file_input("Some error in 'Candy_Crush.apk'")
+        file_input(str(e))
+
+
+def install_apk_abfriends():    
+    file_input("Fn install_apk_abfriends() started.\n")
+    try:
+        apk_path = "C:\\Sanity_BGP_N_master\\ConfigFiles\\apk\\Angry_Birds_Friends_v3.7.0.apk"
+        install_dir = "C:\\Program Files\\BlueStacks"
+        if install_dir:
+            apk_handler_path = install_dir + "\\HD-ApkHandler.exe"
+
+            try:
+                install_com = apk_handler_path + " " + apk_path
+                install = subp.call(install_com)
+                wait(5)
+
+                if exists("1525935213194.png",10):
+                    click("1525935213194.png")                
+                                            
+                    if exists("1525935752058.png",120):
+                        file_input("App Install 'ABFriends' via HD-ApkHandler.exe is working properly : Pass \n")                    
+                    else:
+                        if exists("1524045891206.png",10):
+                            click(Pattern("1524045891206.png").targetOffset(23,-1))
+                            if exists(Pattern("1524050453946.png").targetOffset(120,17),10):
+                                click(Pattern("1524050453946.png").targetOffset(120,17))
+                                wait(2)
+                                install = subp.call(install_com)
+                                wait(2)
+                            
+                        if exists("1524046908445.png",10):
+                            click(Pattern("1524046908445.png").targetOffset(25,-2))   
+                            if exists(Pattern("1524050453946.png").targetOffset(120,17),10):
+                                click(Pattern("1524050453946.png").targetOffset(120,17))
+                                wait(2)
+                                install = subp.call(install_com)
+                                wait(2)
+                            
+                        if exists("1524048187299.png",10):
+                            click(Pattern("1524048187299.png").targetOffset(28,-1))
+                            if exists(Pattern("1524050453946.png").targetOffset(120,17),10):
+                                click(Pattern("1524050453946.png").targetOffset(120,17))
+                                wait(2)
+                                install = subp.call(install_com)
+                                wait(2)
+                            
+                        if exists("1524050385541.png",10):
+                            click(Pattern("1524050385541.png").targetOffset(21,-1))
+                            if exists(Pattern("1524050453946.png").targetOffset(120,17),10):
+                                click(Pattern("1524050453946.png").targetOffset(120,17))
+                                wait(2)
+                                install = subp.call(install_com)
+                                wait(2)
+
+                        if exists("1525935752058.png",10):
+                            file_input("App Install 'ABFriends' via HD-ApkHandler.exe is working properly : Pass \n")
+                        else:
+                            file_input("App Install 'ABFriends' via HD-ApkHandler.exe is working properly : Fail \n")    
+                        
+            except Exception, e:
+                file_input("App Install 'ABFriends' via HD-ApkHandler.exe is working properly : Fail \n")
+                file_input("Some error in 'AB_Friends.apk'")
+                file_input(str(e))
+                file_input(traceback.format_exc())                
+
+    except Exception, e:
+        file_input("Some error in 'AB_Friends.apk'")
+        file_input(str(e))
+
+
+#ApkInstall_UI()
+#sys.exit(1001)
+
+subp.Popen(r'C:\Users\Alok-qa-perf\Desktop\MemoryLongRun\Emulator\BlueStacks-Installer_4.1.21.2018.exe')
+
+try:
+    OTS()
+except Exception, e:
+    file_input("Issue in OTS() - " + str(e))
+    file_input("Sanity Testcase:: One Time Setup for BlueStacks BGP Build(Couldn't execute function) : Fail \n")
+ 

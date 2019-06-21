@@ -1,0 +1,159 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>Bluestacks4_OTS.sikuli</h2> <a href="Bluestacks4_OTS.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> logging
+<span class="kw">import</span> datetime
+<span class="kw">import</span> os, sys
+<span class="kw">import</span> json
+
+logging.basicConfig(filename=<span class="str">r"C:\Users\Administrator\Desktop\perf_rc_suite\Logs\Logs.txt"</span>,level=logging.DEBUG)
+
+<span class="kw">with</span> open(<span class="str">r"C:\Users\Administrator\Desktop\perf_rc_suite\flags.json"</span>) <span class="kw">as</span> f:
+    data = json.load(f)
+
+curBuild = data[<span class="str">"builds"</span>][<span class="str">"current"</span>]
+isDefOTS = data[<span class="str">"builds"</span>][str(curBuild)][<span class="str">"defOTS"</span>]
+
+<span class="kw">def</span> slowType(text, time):
+    <span class="kw">for</span> c <span class="kw">in</span> text:
+        <span class="skw">type</span>(c)
+        <span class="skw">wait</span>(time)
+<span class="kw">def</span> OTS():
+    <span class="kw">try</span>:
+        <span class="kw">if</span> isDefOTS == <span class="dig">0</span>:
+            <span class="kw">if</span> exists(<img src="1552384923502.png" />, <span class="dig">60</span>):
+                <span class="skw">click</span>(<img src="1552384964986.png" />)
+                logging.warning(str(datetime.datetime.now()) + <span class="str">" Clicked on Let's Go"</span>)
+            <span class="kw">else</span>:
+                logging.warning(str(datetime.datetime.now()) + <span class="str">" Couldnt find Let's Go"</span>)
+        <span class="kw">elif</span> isDefOTS == <span class="dig">1</span>:
+            <span class="kw">if</span> exists(<img src="1558087631738.png" />, <span class="dig">60</span>):
+                <span class="skw">click</span>(<img src="1558087631738.png" />)
+                logging.warning(str(datetime.datetime.now()) + <span class="str">" Clicked on sign in (def pop up)"</span>)
+            <span class="kw">else</span>:
+                logging.warning(str(datetime.datetime.now()) + <span class="str">" Couldnt find pop up sign in"</span>)
+            <span class="kw">if</span> exists(<img src="1558085295209.png" />, <span class="dig">60</span>):
+                <span class="skw">click</span>(<img src="1558085295209.png" />)
+                logging.warning(str(datetime.datetime.now()) + <span class="str">" Clicked on sign in (Play Store)"</span>)
+            <span class="kw">else</span>:
+                logging.warning(str(datetime.datetime.now()) + <span class="str">" Couldnt find Play Store sign in"</span>)
+
+
+        <span class="kw">if</span> exists(<img src="1558085340140.png" />, <span class="dig">60</span>):
+            <span class="skw">click</span>(<img src="1558085340140.png" />)
+            logging.warning(str(datetime.datetime.now()) + <span class="str">" Clicked on email field"</span>)
+            <span class="skw">wait</span>(<span class="dig">10</span>)
+            slowType(<span class="str">"qatestblue"</span>, <span class="dig">1</span>)
+            logging.warning(str(datetime.datetime.now()) + <span class="str">" Typed in email"</span>)
+            <span class="kw">if</span> exists(<img src="1558085375531.png" />, <span class="dig">30</span>):
+                <span class="skw">click</span>(<img src="1558085375531.png" />)
+                logging.warning(str(datetime.datetime.now()) + <span class="str">" Clicked on Next"</span>)
+            <span class="kw">if</span> exists(<img src="1558092315801.png" />, <span class="dig">30</span>):
+                <span class="skw">click</span>(Pattern(<img src="1558092315801.png" />).targetOffset(-<span class="dig">305</span>,<span class="dig">3</span>))
+                logging.warning(str(datetime.datetime.now()) + <span class="str">" Clicked on Password field"</span>)
+            <span class="skw">wait</span>(<span class="dig">10</span>)
+            slowType(<span class="str">"bluestacks"</span>, <span class="dig">1</span>)
+            logging.warning(str(datetime.datetime.now()) + <span class="str">" Typed in password"</span>)
+            <span class="kw">if</span> exists(<img src="1558085375531.png" />, <span class="dig">30</span>):
+                <span class="skw">click</span>(<img src="1558085375531.png" />)
+                logging.warning(str(datetime.datetime.now()) + <span class="str">" Clicked on Next"</span>)
+            <span class="kw">if</span> exists(<img src="1558085468291.png" />, <span class="dig">30</span>):
+                <span class="skw">click</span>(<img src="1558085468291.png" />)
+                logging.warning(str(datetime.datetime.now()) + <span class="str">" Clicked on I agree"</span>)
+            <span class="kw">if</span> isDefOTS == <span class="dig">0</span>:
+                <span class="kw">if</span> exists(<img src="1551785052086.png" />, <span class="dig">30</span>):
+                    <span class="skw">click</span>(<img src="1551785062952.png" />)
+                    logging.warning(str(datetime.datetime.now()) + <span class="str">" Clicked on Start Using Bluestacks"</span>)
+            <span class="kw">elif</span> isDefOTS == <span class="dig">1</span>:
+                <span class="kw">if</span> exists(Pattern(<img src="1558087747659.png" />).targetOffset(<span class="dig">447</span>,<span class="dig">234</span>), <span class="dig">60</span>):
+                    <span class="skw">click</span>(Pattern(<img src="1558087747659.png" />).targetOffset(<span class="dig">448</span>,<span class="dig">237</span>))
+                    logging.warning(str(datetime.datetime.now()) + <span class="str">" Clicked on arrow (backup page)"</span>)
+                <span class="kw">else</span>:
+                    logging.warning(str(datetime.datetime.now()) + <span class="str">" Couldnt find down arrow before accepting backup"</span>)
+                <span class="kw">if</span> exists(<img src="1558087857165.png" />, <span class="dig">60</span>):
+                    <span class="skw">click</span>(<img src="1558087857165.png" />)
+                    logging.warning(str(datetime.datetime.now()) + <span class="str">" Accepted Backup"</span>)
+                <span class="kw">else</span>:
+                    logging.warning(str(datetime.datetime.now()) + <span class="str">" Couldnt find Accept backup"</span>)
+
+
+    <span class="kw">except</span> Exception, e:
+        logging.warning(str(datetime.datetime.now()) + <span class="str">" Couldnt Complete OTS; error - "</span> + str(e))
+        sys.exit(<span class="dig">0</span>)
+
+<span class="kw">try</span>:
+    OTS()
+<span class="kw">except</span> Exception, e:
+    logging.warning(str(datetime.datetime.now()) + <span class="str">" Couldnt Complete OTS; error - "</span> + str(e))
+</pre>
+</body>
+</html>

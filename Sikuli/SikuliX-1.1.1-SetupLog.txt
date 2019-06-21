@@ -1,0 +1,136 @@
+[debug (15/5/19 3:54:41 PM)] Debug: setLogFile: C:\Users\Performance\Desktop\perf_rc_suite\SikuliX-1.1.1-SetupLog.txt
+[debug (15/5/19 3:54:41 PM)] RunSetup: ... starting with no args given
+[debug (15/5/19 3:54:41 PM)] RunSetup: Setup: 1.1.1 2017-03-29_10:41 in folder:
+C:\Users\Performance\Desktop\perf_rc_suite
+[debug (15/5/19 3:54:41 PM)] RunSetup: RunningSystem: Windows 10.0
+[debug (15/5/19 3:54:41 PM)] RunSetup: parent of jar/classes: C:\Users\Performance\Desktop\perf_rc_suite
+[debug (15/5/19 3:54:41 PM)] RunSetup: RunningJava: Java 8 (x86) 1.8.0_201-b09
+[debug (15/5/19 3:54:41 PM)] init user preferences
+[debug (15/5/19 3:55:23 PM)] RunSetup: 
+popAsk: --------------------
+The following file(s) will be downloaded to
+C:\Users\Performance\Desktop\perf_rc_suite
+--- Native support libraries for Windows (sikulixlibs...)
+--- Package 1 ---
+sikulixsetupIDE-1.1.1-20170329.232057-141-forsetup.jar (IDE/Scripting)
+sikulixsetupAPI-1.1.1-20170329.231900-143-forsetup.jar (Java API)
+ - with Jython
+Only click NO, if you want to terminate setup now!
+Click YES even if you want to use local copies in Downloads!
+--------------------
+[debug (15/5/19 3:55:31 PM)] FileManager: download to string from:
+https://oss.sonatype.org/content/groups/public/com/sikulix/sikulixlibswin/1.1.1-SNAPSHOT/maven-metadata.xml,
+[debug (15/5/19 3:55:32 PM)] RunSetup: getMavenJar: sikulixlibswin-1.1.1-20170329.230420-154.jar
+[debug (15/5/19 3:55:33 PM)] FileManager: Downloading sikulixlibswin-1.1.1-20170329.230420-154.jar having 10577 KB
+[debug (15/5/19 3:55:50 PM)] FileManager: downloaded 10577 KB to:
+C:\Users\Performance\AppData\Roaming\Sikulix\SikulixDownloads_201703291041\sikulixlibswin-1.1.1-20170329.230420-154.jar
+[debug (15/5/19 3:55:50 PM)] FileManager: download time: 16
+[debug (15/5/19 3:55:53 PM)] RunSetup: Copied from Downloads: sikulixlibswin
+[debug (15/5/19 3:55:53 PM)] FileManager: resetFolder:
+C:\Users\Performance\Desktop\perf_rc_suite\SetupStuff\sikulixlibs\windows
+jar:file:/C:/Users/Performance/Desktop/perf_rc_suite/sikulixlibswin.jar
+[debug (15/5/19 3:55:53 PM)] FileManager: download to string from:
+https://oss.sonatype.org/content/groups/public/com/sikulix/sikulixsetupAPI/1.1.1-SNAPSHOT/maven-metadata.xml,
+[debug (15/5/19 3:55:53 PM)] RunSetup: getMavenJar: sikulixsetupAPI-1.1.1-20170329.231900-143-forsetup.jar
+[debug (15/5/19 3:55:54 PM)] FileManager: Downloading sikulixsetupAPI-1.1.1-20170329.231900-143-forsetup.jar having 9352 KB
+[debug (15/5/19 3:56:15 PM)] FileManager: downloaded 9352 KB to:
+C:\Users\Performance\AppData\Roaming\Sikulix\SikulixDownloads_201703291041\sikulixsetupAPI-1.1.1-20170329.231900-143-forsetup.jar
+[debug (15/5/19 3:56:15 PM)] FileManager: download time: 20
+[debug (15/5/19 3:56:18 PM)] RunSetup: Copied from Downloads: sikulixapi
+[debug (15/5/19 3:56:18 PM)] FileManager: resetFolder:
+C:\Users\Performance\Desktop\perf_rc_suite\SetupStuff\Lib
+jar:file:/C:/Users/Performance/Desktop/perf_rc_suite/sikulixapi.jar
+[debug (15/5/19 3:56:18 PM)] FileManager: download to string from:
+https://oss.sonatype.org/content/groups/public/com/sikulix/sikulixsetupIDE/1.1.1-SNAPSHOT/maven-metadata.xml,
+[debug (15/5/19 3:56:18 PM)] RunSetup: getMavenJar: sikulixsetupIDE-1.1.1-20170329.232057-141-forsetup.jar
+[debug (15/5/19 3:56:18 PM)] FileManager: Downloading sikulixsetupIDE-1.1.1-20170329.232057-141-forsetup.jar having 10709 KB
+[debug (15/5/19 3:56:37 PM)] FileManager: downloaded 10709 KB to:
+C:\Users\Performance\AppData\Roaming\Sikulix\SikulixDownloads_201703291041\sikulixsetupIDE-1.1.1-20170329.232057-141-forsetup.jar
+[debug (15/5/19 3:56:37 PM)] FileManager: download time: 18
+[debug (15/5/19 3:56:40 PM)] RunSetup: Copied from Downloads: sikulix
+[debug (15/5/19 3:56:40 PM)] RunSetup: 
+popAsk: --------------------
+If you click YES, you will get Jython version 2.7.0 (recommended)
+... but in rare cases there might be issues with UTF-8/Unicode
+that usually appear on startup when UTF-8 characters
+are present somewhere in the system environment
+If you encounter such problems with Jython 2.7.0
+run setup again and
+click NO to get Jython 2.5.4rc1
+--------------------
+[debug (15/5/19 3:57:18 PM)] FileManager: Downloading jython-standalone-2.7.0.jar having 36154 KB
+[debug (15/5/19 3:58:29 PM)] FileManager: downloaded 36154 KB to:
+C:\Users\Performance\AppData\Roaming\Sikulix\SikulixDownloads\jython-standalone-2.7.0.jar
+[debug (15/5/19 3:58:29 PM)] FileManager: download time: 70
+[debug (15/5/19 3:58:32 PM)] RunSetup: Copied from Downloads: Jython
+[debug (15/5/19 3:58:32 PM)] RunSetup: Download ended
+[debug (15/5/19 3:58:32 PM)] RunSetup: Downloads for selected options:
+sikulixlibswin-1.1.1-20170329.230420-154.jar sikulixsetupIDE-1.1.1-20170329.232057-141-forsetup.jar sikulixsetupAPI-1.1.1-20170329.231900-143-forsetup.jar jython-standalone-2.7.0.jar 
+[debug (15/5/19 3:58:32 PM)] RunSetup: adding needed stuff to sikulix.jar
+[debug (15/5/19 3:58:32 PM)] FileManager: buildJar: sikulixtemp.jar
+[debug (15/5/19 3:58:32 PM)] FileManager: buildJar: adding: sikulix.jar
+[debug (15/5/19 3:58:34 PM)] FileManager: buildJar: adding: sikulixapi.jar
+[debug (15/5/19 3:58:35 PM)] FileManager: buildJar: adding: sikulixjython.jar
+[debug (15/5/19 3:58:46 PM)] FileManager: buildJar: adding: sikulixlibswin.jar
+[debug (15/5/19 3:58:50 PM)] FileManager: buildJar: completed
+[debug (15/5/19 3:58:50 PM)] RunSetup: renaming sikulixtemp.jar to target jar: sikulix.jar
+[debug (15/5/19 3:58:50 PM)] RunSetup: processing commandfiles
+[debug (15/5/19 3:58:51 PM)] RunTimeSETUP: addToClasspath:
+file:/C:/Users/Performance/Desktop/perf_rc_suite/sikulix.jar
+[debug (15/5/19 3:58:51 PM)] RunTimeSETUP: exists libs folder at: C:\Users\Performance\AppData\Roaming\Sikulix\SikulixLibs_201703291041
+[debug (15/5/19 3:58:51 PM)] RunSetup: Jython: Trying to run functional test: running script statements via SikuliScript
+[debug (15/5/19 3:58:56 PM)] ScriptingSupport: initScriptingSupport: enter
+[debug (15/5/19 3:58:57 PM)] JythonSupport: init: starting
+[debug (15/5/19 3:58:57 PM)] JythonSupport: init: success
+[debug (15/5/19 3:58:57 PM)] JythonSupport: ***** Jython sys.path
+ 0: C:\Users\Performance\Desktop\perf_rc_suite\Lib
+ 1: C:\Users\Performance\Desktop\perf_rc_suite\sikulix.jar\Lib
+ 2: __classpath__
+ 3: __pyclasspath__/
+[debug (15/5/19 3:58:57 PM)] JythonSupport: ***** Jython sys.path end
+[debug (15/5/19 3:58:57 PM)] Jython: sikuli: Sikuli: starting init
+[debug (15/5/19 3:58:58 PM)] RunTimeSETUP: exists libs folder at: C:\Users\Performance\AppData\Roaming\Sikulix\SikulixLibs_201703291041
+[debug (15/5/19 3:58:58 PM)] RunTimeSETUP: libs folder empty or has wrong content
+[debug (15/5/19 3:58:58 PM)] RunTimeSETUP: now exporting libs
+[debug (15/5/19 3:58:58 PM)] RunTimeSETUP: libs to export are at:
+jar:file:/C:/Users/Performance/Desktop/perf_rc_suite/sikulix.jar!/sikulixlibs/windows/libs32
+[debug (15/5/19 3:58:58 PM)] RunTimeSETUP: resourceList: enter
+[debug (15/5/19 3:58:58 PM)] RunTimeSETUP: resourceLocation: (class org.sikuli.setup.RunSetup) /sikulixlibs/windows/libs32
+[debug (15/5/19 3:58:58 PM)] RunTimeSETUP: resourceList: having jar: jar:file:/C:/Users/Performance/Desktop/perf_rc_suite/sikulix.jar!/sikulixlibs/windows/libs32
+[debug (15/5/19 3:58:59 PM)] RunTimeSETUP: files exported: 17 from: /sikulixlibs/windows/libs32 to:
+ C:\Users\Performance\AppData\Roaming\Sikulix\SikulixLibs_201703291041
+[debug (15/5/19 3:59:00 PM)] RunTimeSETUP: addToWindowsSystemPath: added to systempath:
+C:\Users\Performance\AppData\Roaming\Sikulix\SikulixLibs_201703291041
+[debug (15/5/19 3:59:00 PM)] RunTimeSETUP: checkJavaUsrPath: added to ClassLoader.usrPaths
+[debug (15/5/19 3:59:00 PM)] RunTimeSETUP: loadLib: VisionProxy.dll
+[debug (15/5/19 3:59:00 PM)] Mouse: init start
+[debug (15/5/19 3:59:00 PM)] Mouse: init end
+[debug (15/5/19 3:59:00 PM)] RunTimeSETUP: loadLib: WinUtil.dll
+[debug (15/5/19 3:59:00 PM)] Jython: requested to use as default region: S(0)[0,0 1366x768]
+[debug (15/5/19 3:59:00 PM)] Jython: sikuli: Sikuli: ending init
+[debug (15/5/19 3:59:00 PM)] JythonScriptRunner: running Jython 2.7.0 
+[debug (15/5/19 3:59:00 PM)] ScriptingSupport: initScriptingSupport: added: jython
+[debug (15/5/19 3:59:00 PM)] ScriptingSupport: initScriptingSupport: exit with defaultrunner: jython (py)
+[debug (15/5/19 3:59:00 PM)] Jython: requested to use as default region: S(0)[0,0 1366x768]
+[debug (15/5/19 3:59:01 PM)] JythonScriptRunner: runPython: running statements
+[debug (15/5/19 3:59:01 PM)] Image: BufferedImage: (100, 100)
+[debug (15/5/19 3:59:01 PM)] Finder: Image: __BufferedImage__: (100x100)
+[debug (15/5/19 3:59:01 PM)] Sikulix: testSetup: Finder setup with image worked
+[debug (15/5/19 3:59:01 PM)] FileManager: tempfile create:
+C:\Users\PERFOR~1\AppData\Local\Temp\Sikulix_1727845423\sikuli-8961527491675902529.png
+[debug (15/5/19 3:59:01 PM)] Image: loaded: C:/Users/PERFOR~1/AppData/Local/Temp/Sikulix_1727845423/sikuli-8961527491675902529.png (file:/C:/Users/Performance/AppData/Local/Temp/Sikulix_1727845423/sikuli-8961527491675902529.png)
+[debug (15/5/19 3:59:01 PM)] Image: cached: C:/Users/PERFOR~1/AppData/Local/Temp/Sikulix_1727845423/sikuli-8961527491675902529.png (29 KB) (# 1 KB 29 -- 0 % of 64 MB)
+[debug (15/5/19 3:59:01 PM)] Sikulix: testSetup: Finder setup with image file worked
+[debug (15/5/19 3:59:01 PM)] Image: reused: C:/Users/PERFOR~1/AppData/Local/Temp/Sikulix_1727845423/sikuli-8961527491675902529.png (file:/C:/Users/Performance/AppData/Local/Temp/Sikulix_1727845423/sikuli-8961527491675902529.png)
+[debug (15/5/19 3:59:01 PM)] Region: wait: waiting 3.0 secs for C:/Users/PERFOR~1/AppData/Local/Temp/Sikulix_1727845423/sikuli-8961527491675902529.png to appear in S(0)[0,0 1366x768]
+[debug (15/5/19 3:59:01 PM)] Region: wait: C:/Users/PERFOR~1/AppData/Local/Temp/Sikulix_1727845423/sikuli-8961527491675902529.png appeared (M[0,0 100x100]@S(S(0)[0,0 1366x768]) S:1.00 C:50,50 [125 msec])
+[debug (15/5/19 3:59:01 PM)] Sikulix: testSetup: Screen.find(imagefile) worked
+[debug (15/5/19 3:59:01 PM)] Image: reused: C:/Users/PERFOR~1/AppData/Local/Temp/Sikulix_1727845423/sikuli-8961527491675902529.png (file:/C:/Users/Performance/AppData/Local/Temp/Sikulix_1727845423/sikuli-8961527491675902529.png)
+[debug (15/5/19 3:59:01 PM)] Region: wait: waiting 3.0 secs for C:/Users/PERFOR~1/AppData/Local/Temp/Sikulix_1727845423/sikuli-8961527491675902529.png to appear in S(0)[0,0 1366x768]
+[debug (15/5/19 3:59:01 PM)] Region: wait: C:/Users/PERFOR~1/AppData/Local/Temp/Sikulix_1727845423/sikuli-8961527491675902529.png appeared (M[0,0 100x100]@S(S(0)[0,0 1366x768]) S:1.00 C:50,50 [171 msec])
+[debug (15/5/19 3:59:01 PM)] Sikulix: testSetup: repeated Screen.find(imagefile) worked
+[debug (15/5/19 3:59:15 PM)] Sikulix: testSetup: Finder.find: worked
+[debug (15/5/19 3:59:20 PM)] RunSetup: ... SikuliX Setup seems to have ended successfully ;-)
+[debug (15/5/19 3:59:20 PM)] RunTimeSETUP: final cleanup
+[debug (15/5/19 3:59:20 PM)] FileManager: deleteFileOrFolder:
+C:\Users\PERFOR~1\AppData\Local\Temp\Sikulix_1727845423

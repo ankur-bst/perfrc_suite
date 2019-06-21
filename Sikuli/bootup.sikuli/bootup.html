@@ -1,0 +1,138 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>bootup.sikuli</h2> <a href="bootup.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> timeit
+<span class="kw">import</span> logging
+<span class="kw">import</span> datetime,time
+<span class="kw">import</span> traceback
+<span class="kw">import</span> platform
+<span class="kw">import</span> os,sys,re
+<span class="kw">import</span> glob
+<span class="kw">import</span> subprocess <span class="kw">as</span> subp
+<span class="kw">import</span> time, json
+<span class="kw">import</span> os.path
+<span class="kw">import</span> zipfile
+<span class="kw">import</span> urllib,urllib2
+<span class="kw">import</span> argparse
+<span class="kw">import</span> json
+<span class="kw">import</span> copy, shutil
+<span class="kw">import</span> ssl, socket
+<span class="kw">import</span> xml.etree.ElementTree <span class="kw">as</span> ET
+<span class="kw">from</span> xml.dom <span class="kw">import</span> minidom
+
+<span class="kw">def</span> file_input(text_input):
+    <span class="kw">try</span>:
+        my_dir = <span class="str">"C:\\Users\\Administrator\\Desktop\\Perf RC Automation\\Logs\\"</span>
+        my_file=file(my_dir + <span class="str">"Logs.txt"</span>, <span class="str">"a"</span>)
+        my_file.write(text_input)
+        my_file.close
+    <span class="kw">except</span>:
+        <span class="kw">print</span> <span class="str">"Issue writing in File..."</span>
+
+<span class="kw">def</span> Android_BootupCheck():
+    frontend_up()
+
+
+<span class="kw">def</span> frontend_up():
+    <span class="kw">try</span>:
+        start_time = time.time()
+        file_input(<span class="str">"Start Time : - "</span> + str(start_time) + <span class="str">"\n"</span>)
+        timeout = <span class="dig">300</span>
+        <span class="kw">while</span> time.time() - start_time &lt; timeout:
+            resp = getLastApp()
+            file_input(<span class="str">"getLastApp Responce "</span> + str(resp) + <span class="str">"\n"</span>)
+            <span class="kw">if</span> ((resp != None)) :
+                file_input(<span class="str">"Home app has launched\n"</span>)
+                <span class="kw">print</span> <span class="str">"Android Bootup Check Pass"</span>
+                end_time = time.time()
+                diff = end_time - start_time
+                diff = <span class="str">"%.2f"</span> % diff
+                file_input(<span class="str">"End Time : - "</span> + str(end_time) + <span class="str">"\n"</span>)
+                file_input(<span class="str">"Android Bootup Time : "</span> + str(end_time) + <span class="str">" - "</span> + str(start_time) + <span class="str">" = "</span> + str(end_time - start_time) + <span class="str">"\n"</span>)
+                file_input(<span class="str">"Sanity Testcase:: Android Bootup Check Successful : PASS\n"</span>)
+                file_input(<span class="str">"Sanity Testcase:: Android First Bootup Time Duration : "</span> + str(diff) + <span class="str">"s\n"</span>)
+                <span class="kw">return</span> <span class="dig">0</span>
+            <span class="kw">else</span>:
+                time.<span class="skw">sleep</span>(<span class="dig">2</span>)
+
+            <span class="kw">if</span> time.time() - start_time &gt; timeout:
+                file_input(<span class="str">"Something went wrong , Android Up\n"</span>)
+                file_input(<span class="str">"Sanity Testcase:: Android Bootup Check Successful : FAIL\n"</span>)
+                <span class="kw">print</span> <span class="str">"EXIT"</span>
+                sys.exit(<span class="dig">1001</span>)
+
+    <span class="kw">except</span> Exception, e:
+        file_input(<span class="str">"Error in frontend_up - "</span> + str(e))
+        file_input(<span class="str">"Sanity Testcase:: Android Bootup Check Successful : FAIL\n"</span>)
+</pre>
+</body>
+</html>
